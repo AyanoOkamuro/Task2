@@ -3,11 +3,11 @@ class BooksController < ApplicationController
     @books = Book.all
     @book = Book.new
   end
-  
+
   def create
     book = Book.new(book_params)
     if book.save
-      redirect_to book_path #投稿詳細ページ(show)へ移動
+      redirect_to book_path(book) #投稿詳細ページ(show)へ移動
       flash[:notice] = "Book was successfully created."
     else
       render books_path #投稿一覧ページ(index)へ
@@ -21,12 +21,12 @@ class BooksController < ApplicationController
   def edit
     @book = Book.find_by(id: params[:id]) #curent_bookがいる？
     #validation、なければerror
-    flash = "Book was successfully update"　#successfully必要
+    #flash[:notice] = "Book was successfully update"　#successfully必要
   end
-  
+
   def destroy
-    @book = Book.find_by(id: params[:id])　#successfully必要
-    
+    #@book = Book.find_by(id: params[:id])　#successfully必要
+
   end
 
 private
