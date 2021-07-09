@@ -7,30 +7,34 @@ class BooksController < ApplicationController
   def create
     book = Book.new(book_params)
     if book.save
+      flash[:success] = "Book was successfully created."
       redirect_to book_path(book) #投稿詳細ページ(show)へ移動
-      flash[:notice] = "Book was successfully created."
-    else
-      render books_path #投稿一覧ページ(index)へ
-      #flashではない何かerror文が表示されている
+    #else
+      #render :index #投稿一覧ページ(index)へ
     end
   end
 
   def show
-    @book = Book.find_by(params[:title], params[:body])
+    @book = Book.find(params[:id])
   end
 
   def edit
-    @book = Book.find_by(params[:id])
-    #validation、なければerror
-    #flash[:notice] = "Book was successfully update"　#successfully必要
+    @book = Book.find(params[:id])
   end
 
   def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    flash[:success] = "Book was successfully updated."
+    redirect_to book_path(book)
+
   end
 
   def destroy
-    #@book = Book.find_by(id: params[:id])　#successfully必要
-
+    book = Book.find(params[:id])
+    book.destroy
+    flash[:notice] = "Book was successfully destroyed."
+    redirect_to books_path
   end
 
 private
