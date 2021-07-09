@@ -16,6 +16,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book = Book.find_by(params[:title], params[:body])
   end
 
   def edit
