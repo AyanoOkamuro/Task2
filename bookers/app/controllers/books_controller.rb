@@ -20,9 +20,12 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find_by(id: params[:id]) #curent_bookがいる？
+    @book = Book.find_by(params[:id])
     #validation、なければerror
     #flash[:notice] = "Book was successfully update"　#successfully必要
+  end
+
+  def update
   end
 
   def destroy
