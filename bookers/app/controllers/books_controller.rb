@@ -5,12 +5,13 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params)
-    if book.save
+    @book = Book.new(book_params)
+    @books =  Book.all
+    if @book.save
       flash[:success] = "Book was successfully created."
-      redirect_to book_path(book) #投稿詳細ページ(show)へ移動
-    #else
-      #render :index #投稿一覧ページ(index)へ
+      redirect_to book_path(@book) #投稿詳細ページ(show)へ移動
+    else
+      render :index #投稿一覧ページ(index)へ
     end
   end
 
