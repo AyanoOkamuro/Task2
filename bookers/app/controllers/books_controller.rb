@@ -27,7 +27,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.update(book_params)
       flash[:success] = "Book was successfully updated."
-      redirect_to book_path(@ook)
+      redirect_to book_path(@book)
     else
       render :edit #投稿編集ページ(edit)へ
     end
